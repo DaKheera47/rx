@@ -78,6 +78,25 @@
       .htmx-request.htmx-indicator {
         display: inline-flex;
       }
+
+      .filter-group {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+        align-items: center;
+      }
+
+      .filter-group label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
@@ -108,9 +127,47 @@
         <span>Loading...</span>
       </div>
 
+      <div class="filter-group" style="margin-top: 1.25rem">
+        <span style="font-weight: 600; font-size: 0.9rem; margin-right: 0.5rem">Filter by Country:</span>
+        <label><input type="checkbox" name="country" value="USA" checked /> USA</label>
+        <label><input type="checkbox" name="country" value="UK" checked /> UK</label>
+        <label><input type="checkbox" name="country" value="Australia" checked /> Australia</label>
+      </div>
+
       <section id="results" style="margin-top: 1.25rem">
         {% include 'partials/results_table.html' %}
       </section>
     </main>
+
+    <script>
+      function applyFilters() {
+        const selectedCountries = Array.from(document.querySelectorAll('input[name="country"]:checked')).map(
+          (cb) => cb.value
+        );
+        const rows = document.querySelectorAll("#results-table tbody tr");
+
+        rows.forEach((row) => {
+          if (row.classList.contains("no-results-row")) return;
+          const country = row.getAttribute("data-country");
+          if (selectedCountries.includes(country)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      document.addEventListener("change", (e) => {
+        if (e.target.name === "country") {
+          applyFilters();
+        }
+      });
+
+      document.addEventListener("htmx:afterSwap", (e) => {
+        if (e.detail.target.id === "results") {
+          applyFilters();
+        }
+      });
+    </script>
   </body>
 </html>

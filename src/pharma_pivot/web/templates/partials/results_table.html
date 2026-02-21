@@ -6,7 +6,7 @@
 <p><strong>RXCUI:</strong> {{ rxcui }}</p>
 {% endif %}
 
-<table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden">
+<table id="results-table" style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden">
   <thead>
     <tr style="background: var(--surface)">
       <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Country</th>
@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     {% for item in results %}
-    <tr>
+    <tr data-country="{{ item.country }}">
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.country }}</td>
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.authority }}</td>
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.brand_name }}</td>
@@ -28,7 +28,7 @@
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.registration_id or '-' }}</td>
     </tr>
     {% else %}
-    <tr>
+    <tr class="no-results-row">
       <td colspan="6" style="padding: 0.75rem; color: var(--muted)">No products to show.</td>
     </tr>
     {% endfor %}
