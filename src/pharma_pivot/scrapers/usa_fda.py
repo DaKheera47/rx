@@ -32,19 +32,7 @@ class USAFDAScraper(BaseScraper):
                 payload = response.json()
         except Exception as exc:
             self.logger.warning("openFDA query failed generic='%s': %s", generic_name, exc)
-            return self.validate_products(
-                [
-                    {
-                        "generic_name": generic_name,
-                        "brand_name": f"{generic_name.title()} Mock US",
-                        "country": self.country,
-                        "authority": self.authority,
-                        "registration_id": "US-MOCK-0001",
-                        "source_url": self.endpoint,
-                        "rxcui": rxcui,
-                    }
-                ]
-            )
+            return []
 
         products = []
         for item in payload.get("results", []):
@@ -61,18 +49,7 @@ class USAFDAScraper(BaseScraper):
             )
 
         if not products:
-            self.logger.info("openFDA returned 0 rows for generic='%s'; using mock fallback", generic_name)
-            products.append(
-                {
-                    "generic_name": generic_name,
-                    "brand_name": f"{generic_name.title()} Mock US",
-                    "country": self.country,
-                    "authority": self.authority,
-                    "registration_id": "US-MOCK-EMPTY-0001",
-                    "source_url": self.endpoint,
-                    "rxcui": rxcui,
-                }
-            )
+            self.logger.info("openFDA returned 0 rows for generic='%s'", generic_name)
 
         self.logger.info("openFDA normalized rows=%s generic='%s'", len(products), generic_name)
 

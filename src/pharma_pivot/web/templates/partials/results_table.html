@@ -1,31 +1,31 @@
 {% if message %}
-<p>{{ message }}</p>
+<p style="color: var(--muted)">{{ message }}</p>
 {% endif %}
 
 {% if rxcui %}
 <p><strong>RXCUI:</strong> {{ rxcui }}</p>
 {% endif %}
 
-<table style="width: 100%; border-collapse: collapse">
+<table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden">
   <thead>
-    <tr>
-      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Country</th>
-      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Authority</th>
-      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Brand Name</th>
-      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Registration ID</th>
+    <tr style="background: var(--surface)">
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Country</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Authority</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Brand Name</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Registration ID</th>
     </tr>
   </thead>
   <tbody>
     {% for item in results %}
     <tr>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.country }}</td>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.authority }}</td>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.brand_name }}</td>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.registration_id or '-' }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.country }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.authority }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.brand_name }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.registration_id or '-' }}</td>
     </tr>
     {% else %}
     <tr>
-      <td colspan="4" style="padding: 0.75rem">No products to show.</td>
+      <td colspan="4" style="padding: 0.75rem; color: var(--muted)">No products to show.</td>
     </tr>
     {% endfor %}
   </tbody>
