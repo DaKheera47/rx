@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 
 from pharma_pivot.core.normalizer import RxNormNormalizer
 from pharma_pivot.scrapers.aus_tga import AUSTGAScraper
-from pharma_pivot.scrapers.uk_mhra import UKMHRAScraper
+from src.pharma_pivot.scrapers.uk_emc import UKEMCScraper
 from pharma_pivot.scrapers.usa_fda import USAFDAScraper
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -37,7 +37,7 @@ def _configure_logging() -> None:
 _configure_logging()
 
 normalizer = RxNormNormalizer()
-active_scrapers = [USAFDAScraper(), UKMHRAScraper(), AUSTGAScraper()]
+active_scrapers = [USAFDAScraper(), UKEMCScraper(), AUSTGAScraper()]
 
 
 @app.get("/", response_class=HTMLResponse)

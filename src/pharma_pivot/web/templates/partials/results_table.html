@@ -12,7 +12,9 @@
       <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Country</th>
       <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Authority</th>
       <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Brand Name</th>
-      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Registration ID</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Active Ingredients</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Manufacturer</th>
+      <th style="text-align: left; border-bottom: 1px solid var(--border); padding: 0.5rem">Source ID</th>
     </tr>
   </thead>
   <tbody>
@@ -21,11 +23,13 @@
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.country }}</td>
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.authority }}</td>
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.brand_name }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.active_ingredients or '-' }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.manufacturer_name or '-' }}</td>
       <td style="padding: 0.5rem; border-bottom: 1px solid var(--border)">{{ item.registration_id or '-' }}</td>
     </tr>
     {% else %}
     <tr>
-      <td colspan="4" style="padding: 0.75rem; color: var(--muted)">No products to show.</td>
+      <td colspan="6" style="padding: 0.75rem; color: var(--muted)">No products to show.</td>
     </tr>
     {% endfor %}
   </tbody>

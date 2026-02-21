@@ -36,6 +36,19 @@ class USAFDAScraper(BaseScraper):
 
         products = []
         for item in payload.get("results", []):
+            ingredient_values = []
+            for ingredient in item.get("active_ingredients", []):
+                ingredient_name = ingredient.get("name")
+                if ingredient_name:
+                    ingredient_values.append(ingredient_name)
+
+            manufacturer_name = item.get("labeler_name")
+            if not manufacturer_name:
+                openfda = item.get("openfda", {})
+                labeler_names = openfda.get("manufacturer_name", [])
+                if labeler_names:
+                    manufacturer_name = labeler_names[0]
+
             products.append(
                 {
                     "generic_name": generic_name,
@@ -43,6 +56,8 @@ class USAFDAScraper(BaseScraper):
                     "country": self.country,
                     "authority": self.authority,
                     "registration_id": item.get("product_ndc"),
+                    "active_ingredients": ", ".join(ingredient_values) if ingredient_values else None,
+                    "manufacturer_name": manufacturer_name,
                     "source_url": self.endpoint,
                     "rxcui": rxcui,
                 }

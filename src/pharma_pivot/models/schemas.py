@@ -14,6 +14,8 @@ class ProductSchema(BaseModel):
     country: str = Field(min_length=2)
     authority: str = Field(min_length=2)
     registration_id: Optional[str] = None
+    active_ingredients: Optional[str] = None
+    manufacturer_name: Optional[str] = None
     registration_date: Optional[date] = None
     source_url: Optional[str] = None
     rxcui: Optional[str] = None
