@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PharmaPivot</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  </head>
+  <body>
+    <main style="max-width: 900px; margin: 2rem auto; font-family: system-ui, sans-serif">
+      <h1>PharmaPivot</h1>
+      <p>Search generic drugs and view registered product names across SRA countries.</p>
+
+      <form>
+        <input
+          type="text"
+          name="q"
+          value="{{ query }}"
+          placeholder="Type a generic drug name..."
+          hx-get="/search"
+          hx-target="#results"
+          hx-trigger="keyup changed delay:400ms"
+          autocomplete="off"
+          style="width: 100%; padding: 0.65rem; border: 1px solid #d0d7de; border-radius: 8px"
+        />
+      </form>
+
+      <section id="results" style="margin-top: 1.25rem">
+        {% include 'partials/results_table.html' %}
+      </section>
+    </main>
+  </body>
+</html>

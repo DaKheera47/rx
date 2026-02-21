@@ -1,0 +1,32 @@
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+{% if rxcui %}
+<p><strong>RXCUI:</strong> {{ rxcui }}</p>
+{% endif %}
+
+<table style="width: 100%; border-collapse: collapse">
+  <thead>
+    <tr>
+      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Country</th>
+      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Authority</th>
+      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Brand Name</th>
+      <th style="text-align: left; border-bottom: 1px solid #e5e7eb; padding: 0.5rem">Registration ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in results %}
+    <tr>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.country }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.authority }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.brand_name }}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #f3f4f6">{{ item.registration_id or '-' }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4" style="padding: 0.75rem">No products to show.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
